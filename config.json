@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "frontend",
+      "script": "source/server.js",
+      "out_file": "logs/frontend.log",
+      "pid_file": ".frontendPid",
+      "instances": 0,
+      "exec_mode": "cluster",
+      "min_uptime": "700h",
+      "max_restarts": 15,
+      "max_memory_restart": "100M",
+      "merge_logs": true
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-spa-router": "0.0.8",
+    "http-proxy": "^1.12.0",
+    "path": "^0.12.7",
+    "pm2": "^0.15.10"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-shell": "^0.5.1",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.5",
+    "yargs": "^3.31.0"
+  },
+  "scripts": {
+    "start": "./bin/start.sh",
+    "stop": "./bin/stop.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
