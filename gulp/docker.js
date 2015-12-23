@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     shell = require('gulp-shell'),
     runSequence = require('run-sequence');
 
-var containerName = 'vlm-backend';
+var containerName = 'http-spa';
 
 gulp.task('docker:start', function (done) {
     runSequence('docker:build', 'docker:run', done);
@@ -19,14 +19,18 @@ gulp.task('docker:build', function (done) {
 gulp.task('docker:run', function (done) {
     var dockerEnvs = '';
     var port = argv.p;
+    var containerId = argv.n;
     delete argv.p;
     delete argv._;
     delete argv.$0;
+    delete argv.n;
     for (var envIdx in argv) {
         dockerEnvs += ' -e ' + envIdx + '="' + argv[envIdx] + '"';
     }
     var fn = shell.task([
-        'docker run' + dockerEnvs + ' -p ' + port + ':3000 -d ' + containerName
+        'docker rm -f ' + containerId,
+        'docker run' + dockerEnvs + ' --name ' + containerId
+            + ' -p ' + port + ':3000 -d ' + containerName
     ], { cwd : '../' });
     return fn(done);
 });

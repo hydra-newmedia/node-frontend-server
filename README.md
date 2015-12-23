@@ -48,7 +48,8 @@ Requirement: docker installation available.
 
 ```
 cd container
-gulp docker:start -p=[port]
+gulp docker:start -p=[port] -n=[id]
 ```
 
 Where **[port]** is the port you want the application to listen.
+**[id]** is the container's identifying name to be identified and killed with (needed for redeploy).
