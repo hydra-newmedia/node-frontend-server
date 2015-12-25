@@ -30,10 +30,10 @@ gulp.task('docker:run', function (done) {
         dockerEnvs += ' -e ' + envIdx + '="' + argv[envIdx] + '"';
     }
     var fn = shell.task([
-        'killable=$(docker ps | grep ' + containerName + ' | cut -d " " -f1)',
-        'if [[ $killable ]]; then docker rm -f $killable; fi',
-        'docker run' + dockerEnvs + ' --name ' + containerName + '_' + release
-            + ' -p ' + port + ':3000 -d ' + imageName
+        'killable=$(docker ps | grep ' + containerName + ' | cut -d " " -f1)' +
+            ' && if [[ $killable ]]; then docker rm -f $killable; fi',
+        'docker run' + dockerEnvs + ' --name ' + containerName + '_' + release +
+            ' -p ' + port + ':3000 -d ' + imageName
     ], { cwd : '../' });
     return fn(done);
 });
