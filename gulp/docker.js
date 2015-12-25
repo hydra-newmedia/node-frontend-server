@@ -20,16 +20,19 @@ gulp.task('docker:run', function (done) {
     var dockerEnvs = '';
     var port = argv.p;
     var containerName = argv.n;
+    var release = argv.r;
     delete argv.p;
     delete argv._;
     delete argv.$0;
     delete argv.n;
+    delete argv.r;
     for (var envIdx in argv) {
         dockerEnvs += ' -e ' + envIdx + '="' + argv[envIdx] + '"';
     }
     var fn = shell.task([
-        'docker ps | grep ' + containerName + ' | cut -d " " -f1 | xargs docker rm -f',
-        'docker run' + dockerEnvs + ' --name ' + containerName
+        'killable=$(docker ps | grep ' + containerName + ' | cut -d " " -f1)',
+        'if [[ $killable ]]; then docker rm -f $killable; fi',
+        'docker run' + dockerEnvs + ' --name ' + containerName + '_' + release
             + ' -p ' + port + ':3000 -d ' + imageName
     ], { cwd : '../' });
     return fn(done);
