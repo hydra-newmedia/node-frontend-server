@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     shell = require('gulp-shell'),
     runSequence = require('run-sequence');
 
-var containerName = 'http-spa';
+var imageName = 'http-spa';
 
 gulp.task('docker:start', function (done) {
     runSequence('docker:build', 'docker:run', done);
@@ -11,7 +11,7 @@ gulp.task('docker:start', function (done) {
 
 gulp.task('docker:build', function (done) {
     var fn = shell.task([
-        'docker build -t ' + containerName + ' .'
+        'docker build -t ' + imageName + ' .'
     ], { cwd : '../' });
     return fn(done);
 });
@@ -19,7 +19,7 @@ gulp.task('docker:build', function (done) {
 gulp.task('docker:run', function (done) {
     var dockerEnvs = '';
     var port = argv.p;
-    var containerId = argv.n;
+    var containerName = argv.n;
     delete argv.p;
     delete argv._;
     delete argv.$0;
@@ -28,9 +28,9 @@ gulp.task('docker:run', function (done) {
         dockerEnvs += ' -e ' + envIdx + '="' + argv[envIdx] + '"';
     }
     var fn = shell.task([
-        'docker rm -f ' + containerId,
-        'docker run' + dockerEnvs + ' --name ' + containerId
-            + ' -p ' + port + ':3000 -d ' + containerName
+        'docker ps | grep ' + containerName + ' | cut -d " " -f1 | xargs docker rm -f',
+        'docker run' + dockerEnvs + ' --name ' + containerName
+            + ' -p ' + port + ':3000 -d ' + imageName
     ], { cwd : '../' });
     return fn(done);
 });
