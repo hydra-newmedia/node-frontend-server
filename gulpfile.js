@@ -9,6 +9,7 @@ gulp.task('dist', function(){
             'bin/**/*',
             'source/**/*',
             'gulp/**/*',
+            'node_modules/**/*',
             'config.json',
             'gulpfile.js',
             'package.json'

@@ -69,13 +69,13 @@ gulp
 ```
 
 The resulting files from `gulp` will be located in `./dist` directory.
-The node modules installed by `npm` will be located in `./node_modules`.
+The node modules installed by `npm` will be located in `./node_modules` and
+the gulp task copied them to `./dist/container/node_modules`.
 
 ### Deploy
 
 To deploy the application you will need to:
 - grab the `dist` folder and put it to the desired environment
-- run `cd container && npm install && cd ..`
 - copy your static files to be delivered by the http-server to a directory called `public` like: `mkdir public && cp -rp /my/path/to/static/files/* ./public/`
 - afterwards run the application by the following command
 
@@ -85,8 +85,11 @@ Requirement: docker installation available.
 
 ```
 cd container
-gulp docker:start -p=[port] -n=[id]
+gulp docker:start -p=[port] -n=[id] --NODE_ENV=[env]
 ```
 
 Where **[port]** is the port you want the application to listen.
 **[id]** is the container's identifying name to be identified and killed with (needed for redeploy).
+**[env]** is the environment to which you are deploying.
+The script will take the relating correct config file (see above 'NODE_ENV and MODE').
+Example: `gulp docker:start -p=10002 -n=myApp-frontend --NODE_ENV=dev`
