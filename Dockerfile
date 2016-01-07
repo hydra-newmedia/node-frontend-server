@@ -11,7 +11,7 @@ COPY ./container /app
 COPY ./public /app/public
 
 RUN mkdir /app/logs
-RUN chmod 0755 /app/bin/*
+RUN chmod -R 0755 /app
 
 EXPOSE 3000
 

@@ -68,7 +68,7 @@ ondeath(function () {
 });
 
 var configMiddleware = function (req, res, next) {
-    if (req.originalUrl === "/configs/config.json" || req.originalUrl === "/configs/config.js") {
+    if (req.originalUrl === '/configs/config.js' || req.originalUrl === '/configs/config' + cfgFileExt) {
         return res.sendFile(randomCfgFile);
     } else {
         return res.status(403).end('403 Forbidden');
