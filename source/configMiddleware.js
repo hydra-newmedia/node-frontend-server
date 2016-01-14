@@ -57,7 +57,7 @@ if (nodeEnv && fs.statSync(envCfgFile).isFile()) {
             fs.writeFileSync(randomCfgFile, envCfg);
             break;
     }
-} else {
+} else if(fs.statSync(cfgDir).isDirectory() && fs.statSync(defaultCfgFile).isFile()) {
     var config = fs.readFileSync(defaultCfgFile);
     fs.writeFileSync(randomCfgFile, config);
 }
