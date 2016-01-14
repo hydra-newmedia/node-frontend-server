@@ -1,13 +1,13 @@
 var port = 3000;
 var express = require('express');
 var path = require('path');
-var fs = require('fs');
+var fileExists = require('./fileExistsSync');
 var configMiddleware = require('./configMiddleware');
 
-var cfgDir = path.join(__dirname, '/public/configs');
+var cfgDir = path.join(__dirname, '../', './public/configs');
 
 var app = express();
-if(fs.statSync(cfgDir).isDirectory()){
+if(fileExists(cfgDir)){
     app.use('/configs/*', configMiddleware);
 }
 app.use(express.static('./public')); //use static files in ROOT/public folder

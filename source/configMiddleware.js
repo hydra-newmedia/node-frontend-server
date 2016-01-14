@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var fileExists = require('./fileExistsSync');
 var jsonfile = require('jsonfile');
 var _ = require('lodash');
 var ondeath = require('death')({uncaughtException: true});
@@ -30,7 +31,7 @@ var randomCfgFile = cfgDir + '/' + require('crypto').randomBytes(24).toString('h
 
 var nodeEnv = process.env.NODE_ENV;
 var envCfgFile = cfgDir + '/' + nodeEnv + cfgFileExt;
-if (nodeEnv && fs.statSync(envCfgFile).isFile()) {
+if (nodeEnv && fileExists(envCfgFile)) {
     switch (mode) {
         case 'json':
             var defaultCfg = jsonfile.readFileSync(defaultCfgFile);
@@ -57,7 +58,7 @@ if (nodeEnv && fs.statSync(envCfgFile).isFile()) {
             fs.writeFileSync(randomCfgFile, envCfg);
             break;
     }
-} else if(fs.statSync(cfgDir).isDirectory() && fs.statSync(defaultCfgFile).isFile()) {
+} else if(fileExists(cfgDir) && fileExists(defaultCfgFile)) {
     var config = fs.readFileSync(defaultCfgFile);
     fs.writeFileSync(randomCfgFile, config);
 }
