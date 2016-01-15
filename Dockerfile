@@ -15,4 +15,4 @@ RUN chmod -R 0755 /app
 
 EXPOSE 3000
 
-CMD bin/start.sh
+CMD npm start

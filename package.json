@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "source/server.js",
   "dependencies": {
     "death": "^1.0.0",
     "express": "^4.13.3",
@@ -10,8 +10,7 @@
     "http-proxy": "^1.12.0",
     "jsonfile": "^2.2.3",
     "lodash": "^3.10.1",
-    "path": "^0.12.7",
-    "pm2": "^0.15.10"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "del": "^2.2.0",
@@ -22,10 +21,9 @@
     "yargs": "^3.31.0"
   },
   "scripts": {
-    "start": "./bin/start.sh",
-    "stop": "./bin/stop.sh",
+    "start": "node ./source/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "hotz@hydra-newmedia.com",
   "license": "ISC"
 }
