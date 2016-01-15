@@ -1,6 +1,5 @@
-FROM alpine:latest
+FROM mhart/alpine-node:5.4.1
 
-RUN apk add --update nodejs
 RUN apk add --update git
 RUN apk add --update bash
 
