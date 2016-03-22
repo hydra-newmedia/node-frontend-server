@@ -1,12 +1,17 @@
 var port = 3000;
 var express = require('express');
 var path = require('path');
+var compression = require('compression');
+var morgan = require('morgan');
 var fileExists = require('./fileExistsSync');
 var configMiddleware = require('./configMiddleware');
 
 var cfgDir = path.join(__dirname, '../', './public/configs');
 
 var app = express();
+app.use(compression());
+app.use(morgan('dev'));
+
 if(fileExists(cfgDir)){
     app.use('/configs/*', configMiddleware);
 }

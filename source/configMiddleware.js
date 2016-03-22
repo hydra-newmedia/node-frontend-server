@@ -63,7 +63,8 @@ if (nodeEnv && fileExists(envCfgFile)) {
     fs.writeFileSync(randomCfgFile, config);
 }
 
-ondeath(function () {
+ondeath(function (signal, err) {
+    console.log(signal, err);
     fs.unlinkSync(randomCfgFile);
     process.exit();
 });
