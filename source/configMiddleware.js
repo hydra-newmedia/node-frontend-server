@@ -69,8 +69,9 @@ ondeath(function (signal, err) {
     process.exit();
 });
 
+var urlMatch = new RegExp('^/configs/config(.js|' + cfgFileExt + ')');
 var configMiddleware = function (req, res, next) {
-    if (req.originalUrl === '/configs/config.js' || req.originalUrl === '/configs/config' + cfgFileExt) {
+    if (req.originalUrl.match(urlMatch)) {
         return res.sendFile(randomCfgFile);
     } else {
         return res.status(403).end('403 Forbidden');
