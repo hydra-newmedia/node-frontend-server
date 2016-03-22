@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:5.4.1
+FROM mhart/alpine-node:5.9.0
 
 RUN apk add --update git
 RUN apk add --update bash
